@@ -1,16 +1,16 @@
-# jpstockmemo2
+# 日本株投資メモ２
 
-A new Flutter project.
+日本株投資メモ2は<u>東証市場再編対応版</u>です。
 
-## Getting Started
+## 新たな東証市場区分
+2022年4月4日に新たな市場区分がスタートしました。
+新旧の区分は以下の通りです。
 
-This project is a starting point for a Flutter application.
+旧区分 - 東証1部・東証2部・NASDAQ・マザーズ  
+<u><font color="red">**新区分 - プライム・スタンダード・グロース**</font></u>
 
-A few resources to get you started if this is your first Flutter project:
+そこで以前リリースした日本株投資メモを更新します。ところが・・・。
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 目次
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### [開発工程](DEVELOPMENT_PROCESS.md)

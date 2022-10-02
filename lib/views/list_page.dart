@@ -9,19 +9,15 @@ class ListPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('ListPage'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Center(
-            child: Text('ListPage'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/editpage');
-            },
-            child: const Text('EditPage'),
-          )
-        ],
+      body: const Center(
+        child: Text('ListPage'),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.pushNamed(context, '/editpage');
+        },
+        label: const Text('EditPage'),
+        icon: const Icon(Icons.add),
       ),
     );
   }

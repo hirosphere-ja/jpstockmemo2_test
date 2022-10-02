@@ -10,7 +10,26 @@ class ListPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('ListPage'),
       ),
-      body: const StockCard(),
+      body: ListView(
+        children: const [
+          StockCard(
+            stockname: "銘柄名1",
+            code: 1234,
+            market: "市場1",
+            memo: "メモ1",
+            createdAt: null,
+            updatedAt: null,
+          ),
+          StockCard(
+            stockname: "銘柄名2",
+            code: 5678,
+            market: "市場2",
+            memo: "メモ2",
+            createdAt: null,
+            updatedAt: null,
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.pushNamed(context, '/editpage');

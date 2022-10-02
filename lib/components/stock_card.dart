@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
 
 class StockCard extends StatelessWidget {
-  const StockCard({Key? key}) : super(key: key);
+  const StockCard({
+    super.key,
+    required this.stockname,
+    required this.code,
+    required this.market,
+    required this.memo,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  final String? stockname;
+  final int? code;
+  final String? market;
+  final String? memo;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   @override
   Widget build(BuildContext context) {
@@ -12,26 +27,26 @@ class StockCard extends StatelessWidget {
           ListTile(
             title: Column(
               children: [
-                const Text('銘柄名'),
+                Text(stockname!),
                 const SizedBox(
                   height: 8,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('(証券コード)'),
-                    SizedBox(
+                  children: [
+                    Text('($code)'),
+                    const SizedBox(
                       width: 8,
                     ),
-                    Text('市場'),
+                    Text(market!),
                   ],
                 ),
                 const SizedBox(
                   height: 8,
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(4.0),
-                  child: Text('メモ'),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(memo!),
                 ),
               ],
             ),
@@ -41,9 +56,9 @@ class StockCard extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
-              Text('登録日時：createdAt'),
-              Text('更新日時：updatedAt'),
+            children: [
+              Text('登録日時：$createdAt'),
+              Text('更新日時：$updatedAt'),
             ],
           ),
           ButtonBar(

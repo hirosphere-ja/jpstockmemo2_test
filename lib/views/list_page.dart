@@ -6,6 +6,7 @@ class ListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const bool isButtonMode = false;
     return Scaffold(
       appBar: AppBar(
         title: const Text('ListPage'),
@@ -13,6 +14,7 @@ class ListPage extends StatelessWidget {
       body: ListView(
         children: const [
           StockCard(
+            isButtonMode: isButtonMode,
             stockname: "銘柄名1",
             code: 1234,
             market: "市場1",
@@ -21,6 +23,7 @@ class ListPage extends StatelessWidget {
             updatedAt: null,
           ),
           StockCard(
+            isButtonMode: isButtonMode,
             stockname: "銘柄名2",
             code: 5678,
             market: "市場2",

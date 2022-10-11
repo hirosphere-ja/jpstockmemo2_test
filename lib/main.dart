@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jpstockmemo2/views/edit_page.dart';
-import 'package:jpstockmemo2/views/list_page.dart';
+import 'package:jpstockmemo2/route/route_generator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,10 +15,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      routes: {
-        '/': (context) => const ListPage(),
-        '/editpage': (context) => const EditPage(),
-      },
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }

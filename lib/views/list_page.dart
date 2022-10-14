@@ -6,7 +6,7 @@ class ListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const bool isButtonMode = false;
+    const bool isButtonMode = true;
     return Scaffold(
       appBar: AppBar(
         title: const Text('ListPage'),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class StockCard extends StatelessWidget {
-
 /*　引数の詳細
 isButtonMode：編集・削除の操作をボタンかジェスチャーか変更するためのトリガー引数
 true => ボタン、false => ジェスチャー
@@ -38,13 +37,13 @@ updatedAt   ：更新日時
       onLongPress: !isButtonMode
           ? () {
               debugPrint('長押しされました');
-              // メモを削除する
+              // todo メモを削除する
             }
           : null,
       onDoubleTap: !isButtonMode
           ? () {
               debugPrint('ダブルタップされました');
-              // 編集画面に遷移させる
+              // todo 編集画面に遷移させる
             }
           : null,
       child: Card(
@@ -89,8 +88,7 @@ updatedAt   ：更新日時
               ],
             ),
             isButtonMode
-                ?
-                ButtonBar(
+                ? ButtonBar(
                     alignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       ElevatedButton.icon(
@@ -99,7 +97,10 @@ updatedAt   ：更新日時
                         ),
                         icon: const Icon(Icons.edit),
                         label: const Text('編集'),
-                        onPressed: () {},
+                        onPressed: () {
+                          debugPrint('編集ボタンが押されました');
+                          // todo 編集画面に遷移させる
+                        },
                       ),
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
@@ -108,7 +109,10 @@ updatedAt   ：更新日時
                         ),
                         icon: const Icon(Icons.delete),
                         label: const Text('削除'),
-                        onPressed: () {},
+                        onPressed: () {
+                          debugPrint('削除ボタンが押されました');
+                          // todo メモを削除する
+                        },
                       ),
                     ],
                   )

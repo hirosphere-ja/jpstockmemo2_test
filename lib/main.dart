@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:jpstockmemo2/databases/tables.dart';
 import 'package:jpstockmemo2/route/route_generator.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final database = MemoDatabase();
+  final allMemos = await database.select(database.memos).get();
+  debugPrint('Memos in database: $allMemos');
   runApp(const MyApp());
 }
 

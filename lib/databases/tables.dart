@@ -8,18 +8,55 @@ import 'package:path/path.dart' as path;
 
 part 'tables.g.dart';
 
-@DriftDatabase(tables: [Memos])
+@DriftDatabase(
+  tables: [Memos],
+)
 class MemoDatabase extends _$MemoDatabase {
-  MemoDatabase() : super(_openConnection());
+  MemoDatabase()
+      : super(
+          _openConnection(),
+        );
 
   @override
   int get schemaVersion => 1;
+
+  Future<List<Memo>> getMemos() async {
+    return await select(memos).get();
+  }
+
+  Future<Memo> getMemo(int code) async {
+    return await (select(memos)
+          ..where(
+            (tbl) => tbl.code.equals(code),
+          ))
+        .getSingle();
+  }
+
+  Future<bool> updateMemo(MemosCompanion entity) async {
+    return await update(memos).replace(entity);
+  }
+
+  Future<int> insertMemo(MemosCompanion entity) async {
+    return await into(memos).insert(entity);
+  }
+
+  Future<int> deleteMemo(int code) async {
+    return await (delete(memos)
+          ..where(
+            (tbl) => tbl.code.equals(code),
+          ))
+        .go();
+  }
 }
 
 LazyDatabase _openConnection() {
-  return LazyDatabase(() async {
-    final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(path.join(dbFolder.path, 'memos.sqlite'));
-    return NativeDatabase(file);
-  });
+  return LazyDatabase(
+    () async {
+      final dbFolder = await getApplicationDocumentsDirectory();
+      final file = File(
+        path.join(dbFolder.path, 'memos.sqlite'),
+      );
+      return NativeDatabase(file);
+    },
+  );
 }

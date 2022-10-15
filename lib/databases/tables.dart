@@ -2,18 +2,11 @@ import 'package:drift/drift.dart';
 
 import 'dart:io';
 import 'package:drift/native.dart';
+import 'package:jpstockmemo2/models/memos.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
+import 'package:path/path.dart' as path;
 
 part 'tables.g.dart';
-
-class Memos extends Table {
-  IntColumn get code => integer()();
-  TextColumn get stockname => text()();
-
-  @override
-  Set<Column> get primaryKey => {code};
-}
 
 @DriftDatabase(tables: [Memos])
 class MemoDatabase extends _$MemoDatabase {
@@ -26,7 +19,7 @@ class MemoDatabase extends _$MemoDatabase {
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(p.join(dbFolder.path, 'db.sqlite'));
+    final file = File(path.join(dbFolder.path, 'memos.sqlite'));
     return NativeDatabase(file);
   });
 }

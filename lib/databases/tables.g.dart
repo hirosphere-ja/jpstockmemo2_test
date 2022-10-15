@@ -8,13 +8,13 @@ part of 'tables.dart';
 
 // ignore_for_file: type=lint
 class Memo extends DataClass implements Insertable<Memo> {
-  final int code;
+  final String code;
   final String stockname;
   const Memo({required this.code, required this.stockname});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    map['code'] = Variable<int>(code);
+    map['code'] = Variable<String>(code);
     map['stockname'] = Variable<String>(stockname);
     return map;
   }
@@ -30,7 +30,7 @@ class Memo extends DataClass implements Insertable<Memo> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Memo(
-      code: serializer.fromJson<int>(json['code']),
+      code: serializer.fromJson<String>(json['code']),
       stockname: serializer.fromJson<String>(json['stockname']),
     );
   }
@@ -38,12 +38,12 @@ class Memo extends DataClass implements Insertable<Memo> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'code': serializer.toJson<int>(code),
+      'code': serializer.toJson<String>(code),
       'stockname': serializer.toJson<String>(stockname),
     };
   }
 
-  Memo copyWith({int? code, String? stockname}) => Memo(
+  Memo copyWith({String? code, String? stockname}) => Memo(
         code: code ?? this.code,
         stockname: stockname ?? this.stockname,
       );
@@ -67,18 +67,19 @@ class Memo extends DataClass implements Insertable<Memo> {
 }
 
 class MemosCompanion extends UpdateCompanion<Memo> {
-  final Value<int> code;
+  final Value<String> code;
   final Value<String> stockname;
   const MemosCompanion({
     this.code = const Value.absent(),
     this.stockname = const Value.absent(),
   });
   MemosCompanion.insert({
-    this.code = const Value.absent(),
+    required String code,
     required String stockname,
-  }) : stockname = Value(stockname);
+  })  : code = Value(code),
+        stockname = Value(stockname);
   static Insertable<Memo> custom({
-    Expression<int>? code,
+    Expression<String>? code,
     Expression<String>? stockname,
   }) {
     return RawValuesInsertable({
@@ -87,7 +88,7 @@ class MemosCompanion extends UpdateCompanion<Memo> {
     });
   }
 
-  MemosCompanion copyWith({Value<int>? code, Value<String>? stockname}) {
+  MemosCompanion copyWith({Value<String>? code, Value<String>? stockname}) {
     return MemosCompanion(
       code: code ?? this.code,
       stockname: stockname ?? this.stockname,
@@ -98,7 +99,7 @@ class MemosCompanion extends UpdateCompanion<Memo> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (code.present) {
-      map['code'] = Variable<int>(code.value);
+      map['code'] = Variable<String>(code.value);
     }
     if (stockname.present) {
       map['stockname'] = Variable<String>(stockname.value);
@@ -123,9 +124,12 @@ class $MemosTable extends Memos with TableInfo<$MemosTable, Memo> {
   $MemosTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _codeMeta = const VerificationMeta('code');
   @override
-  late final GeneratedColumn<int> code = GeneratedColumn<int>(
+  late final GeneratedColumn<String> code = GeneratedColumn<String>(
       'code', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: false);
+      additionalChecks:
+          GeneratedColumn.checkTextLength(minTextLength: 4, maxTextLength: 4),
+      type: DriftSqlType.string,
+      requiredDuringInsert: true);
   final VerificationMeta _stocknameMeta = const VerificationMeta('stockname');
   @override
   late final GeneratedColumn<String> stockname = GeneratedColumn<String>(
@@ -145,6 +149,8 @@ class $MemosTable extends Memos with TableInfo<$MemosTable, Memo> {
     if (data.containsKey('code')) {
       context.handle(
           _codeMeta, code.isAcceptableOrUnknown(data['code']!, _codeMeta));
+    } else if (isInserting) {
+      context.missing(_codeMeta);
     }
     if (data.containsKey('stockname')) {
       context.handle(_stocknameMeta,
@@ -162,7 +168,7 @@ class $MemosTable extends Memos with TableInfo<$MemosTable, Memo> {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Memo(
       code: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}code'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}code'])!,
       stockname: attachedDatabase.options.types
           .read(DriftSqlType.string, data['${effectivePrefix}stockname'])!,
     );

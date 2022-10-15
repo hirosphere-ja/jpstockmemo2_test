@@ -12,7 +12,7 @@ class RouteGenerator {
         );
       case '/editpage':
         return MaterialPageRoute(
-          builder: (_) => EditPage(),
+          builder: (_) => const EditPage(),
         );
       default:
         return MaterialPageRoute(

@@ -88,8 +88,7 @@ updatedAt   ：更新日時
               ],
             ),
             isButtonMode
-                ? 
-                ButtonBar(
+                ? ButtonBar(
                     alignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       ElevatedButton.icon(

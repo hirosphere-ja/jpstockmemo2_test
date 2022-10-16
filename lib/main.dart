@@ -1,12 +1,10 @@
+import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
-import 'package:jpstockmemo2/databases/tables.dart';
 import 'package:jpstockmemo2/route/route_generator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // late MemoDatabase db = MemoDatabase();
-  // final allMemos = await db.getMemos();
-  // debugPrint('Memos in database: $allMemos');
+  driftRuntimeOptions.dontWarnAboutMultipleDatabases = true; // 警告を解決
   runApp(const MyApp());
 }
 

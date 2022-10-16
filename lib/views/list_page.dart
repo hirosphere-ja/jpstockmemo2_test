@@ -58,8 +58,8 @@ class _ListPageState extends State<ListPage> {
                     code: memo.code,
                     market: "市場",
                     memo: "メモ",
-                    createdAt: createdAt,
-                    updatedAt: updatedAt,
+                    createdAt: null,
+                    updatedAt: null,
                   ),
                 )
                 .toList();

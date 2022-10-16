@@ -1,37 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:jpstockmemo2/components/stock_card.dart';
+import 'package:jpstockmemo2/databases/tables.dart';
 
-class ListPage extends StatelessWidget {
+class ListPage extends StatefulWidget {
   const ListPage({super.key});
 
   @override
+  State<ListPage> createState() => _ListPageState();
+}
+
+class _ListPageState extends State<ListPage> {
+  late MemoDatabase _db;
+  @override
+  void initState() {
+    super.initState();
+
+    _db = MemoDatabase();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    const bool isButtonMode = true;
+    // const bool isButtonMode = true;
     return Scaffold(
       appBar: AppBar(
         title: const Text('ListPage'),
       ),
-      body: ListView(
-        children: const [
-          StockCard(
-            isButtonMode: isButtonMode,
-            stockname: "銘柄名1",
-            code: 1234,
-            market: "市場1",
-            memo: "メモ1",
-            createdAt: null,
-            updatedAt: null,
-          ),
-          StockCard(
-            isButtonMode: isButtonMode,
-            stockname: "銘柄名2",
-            code: 5678,
-            market: "市場2",
-            memo: "メモ2",
-            createdAt: null,
-            updatedAt: null,
-          ),
-        ],
+      body: FutureBuilder<List<Memo>>(
+        future: _db.getMemos(),
+        builder: (context, snapshot) {
+          final List<Memo>? memos = snapshot.data;
+          if (snapshot.connectionState != ConnectionState.done) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                snapshot.error.toString(),
+              ),
+            );
+          }
+
+          if (memos != null) {
+            // return ListView.builder(
+            //   // itemCount: memos.length,
+            //   itemBuilder: (context, index) {
+            final listTiles = memos.map(
+              (memo) => StockCard(
+                stockname: memo.stockname.toString(),
+                code: memo.code,
+              ),
+            );
+          }
+          // );
+          return const Text('No Data');
+        },
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

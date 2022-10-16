@@ -4,9 +4,9 @@ import 'package:jpstockmemo2/route/route_generator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  late MemoDatabase db = MemoDatabase();
-  final allMemos = await db.getMemos();
-  debugPrint('Memos in database: $allMemos');
+  // late MemoDatabase db = MemoDatabase();
+  // final allMemos = await db.getMemos();
+  // debugPrint('Memos in database: $allMemos');
   runApp(const MyApp());
 }
 

@@ -12,40 +12,40 @@ createdAt   ：新規日時
 updatedAt   ：更新日時
 */
 
-  final bool isButtonMode;
+  // final bool isButtonMode;
   final String? stockname;
   final int? code;
-  final String? market;
-  final String? memo;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+  // final String? market;
+  // final String? memo;
+  // final DateTime? createdAt;
+  // final DateTime? updatedAt;
 
   const StockCard({
     super.key,
-    required this.isButtonMode,
+    // required this.isButtonMode,
     required this.stockname,
     required this.code,
-    required this.market,
-    required this.memo,
-    required this.createdAt,
-    required this.updatedAt,
+    // required this.market,
+    // required this.memo,
+    // required this.createdAt,
+    // required this.updatedAt,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: !isButtonMode
-          ? () {
-              debugPrint('長押しされました');
-              // todo メモを削除する
-            }
-          : null,
-      onDoubleTap: !isButtonMode
-          ? () {
-              debugPrint('ダブルタップされました');
-              // todo 編集画面に遷移させる
-            }
-          : null,
+      // onLongPress: !isButtonMode
+      //     ? () {
+      //         debugPrint('長押しされました');
+      //         // todo メモを削除する
+      //       }
+      //     : null,
+      // onDoubleTap: !isButtonMode
+      //     ? () {
+      //         debugPrint('ダブルタップされました');
+      //         // todo 編集画面に遷移させる
+      //       }
+      //     : null,
       child: Card(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -64,31 +64,32 @@ updatedAt   ：更新日時
                       const SizedBox(
                         width: 8,
                       ),
-                      Text(market!),
+                      // Text(market!),
                     ],
                   ),
                   const SizedBox(
                     height: 8,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(memo!),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(4.0),
+                  //   // child: Text(memo!),
+                  // ),
                 ],
               ),
             ),
             const SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text('登録日時：$createdAt'),
-                Text('更新日時：$updatedAt'),
-              ],
-            ),
-            isButtonMode
-                ? ButtonBar(
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //   children: [
+            //     Text('登録日時：$createdAt'),
+            //     Text('更新日時：$updatedAt'),
+            //   ],
+            // ),
+            // isButtonMode
+            //     ? 
+                ButtonBar(
                     alignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       ElevatedButton.icon(
@@ -116,9 +117,9 @@ updatedAt   ：更新日時
                       ),
                     ],
                   )
-                : const SizedBox(
-                    height: 8,
-                  ),
+                // : const SizedBox(
+                //     height: 8,
+                //   ),
           ],
         ),
       ),

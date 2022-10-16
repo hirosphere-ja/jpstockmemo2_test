@@ -58,6 +58,25 @@ class _ListPageState extends State<ListPage> {
                     code: memo.code,
                     market: "市場",
                     memo: "メモ",
+                    onDeleteChanged: () async {
+                      await showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("${memo.stockname}を削除しますか？"),
+                            actions: <Widget>[
+                              ElevatedButton(
+                                onPressed: () async {
+                                  Navigator.of(context).pop();
+                                  await _db.deleteMemo(memo.code);
+                                },
+                                child: const Text("OK"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
                     createdAt: null,
                     updatedAt: null,
                   ),

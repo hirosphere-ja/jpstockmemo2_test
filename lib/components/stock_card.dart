@@ -17,6 +17,7 @@ updatedAt   ：更新日時
   final String? code;
   final String? market;
   final String? memo;
+  final dynamic onDeleteChanged;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -27,6 +28,7 @@ updatedAt   ：更新日時
     required this.code,
     required this.market,
     required this.memo,
+    required this.onDeleteChanged,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -34,14 +36,9 @@ updatedAt   ：更新日時
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: !isButtonMode
-          ? () {
-              debugPrint('長押しされました');
-              // todo メモを削除する
-            }
-          : null,
+      onLongPress: !isButtonMode ? onDeleteChanged : null,
       onDoubleTap: !isButtonMode
-          ? () {
+          ? () async {
               debugPrint('ダブルタップされました');
               // todo 編集画面に遷移させる
             }
@@ -97,7 +94,7 @@ updatedAt   ：更新日時
                         ),
                         icon: const Icon(Icons.edit),
                         label: const Text('編集'),
-                        onPressed: () {
+                        onPressed: () async {
                           debugPrint('編集ボタンが押されました');
                           // todo 編集画面に遷移させる
                         },
@@ -109,10 +106,7 @@ updatedAt   ：更新日時
                         ),
                         icon: const Icon(Icons.delete),
                         label: const Text('削除'),
-                        onPressed: () {
-                          debugPrint('削除ボタンが押されました');
-                          // todo メモを削除する
-                        },
+                        onPressed: onDeleteChanged,
                       ),
                     ],
                   )

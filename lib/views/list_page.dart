@@ -26,7 +26,7 @@ class _ListPageState extends State<ListPage> {
 
   @override
   Widget build(BuildContext context) {
-    // const bool isButtonMode = true;
+    const bool isButtonMode = true;
     return Scaffold(
       appBar: AppBar(
         title: const Text('ListPage'),
@@ -50,14 +50,16 @@ class _ListPageState extends State<ListPage> {
           }
 
           if (memos != null) {
-            // return ListView.builder(
-            //   // itemCount: memos.length,
-            //   itemBuilder: (context, index) {
             final listTiles = memos
                 .map(
                   (memo) => StockCard(
+                    isButtonMode: isButtonMode,
                     stockname: memo.stockname.toString(),
                     code: memo.code,
+                    market: "市場",
+                    memo: "メモ",
+                    createdAt: createdAt,
+                    updatedAt: updatedAt,
                   ),
                 )
                 .toList();

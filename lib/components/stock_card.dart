@@ -14,7 +14,7 @@ updatedAt   ：更新日時
 
   final bool isButtonMode;
   final String? stockname;
-  final int? code;
+  final String? code;
   final String? market;
   final String? memo;
   final DateTime? createdAt;

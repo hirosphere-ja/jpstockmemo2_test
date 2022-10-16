@@ -23,6 +23,14 @@ class _EditPageState extends State<EditPage> {
   }
 
   @override
+  void dispose() {
+    _db.close();
+    _nameController.dispose();
+    _codeController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -50,7 +58,7 @@ class _EditPageState extends State<EditPage> {
                   return '４桁の半角数字を入力してください';
                 }
               },
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.text,
             ),
             CustomTextFormField(
               controller: _nameController,
@@ -85,7 +93,7 @@ class _EditPageState extends State<EditPage> {
                                 actions: <Widget>[
                                   ElevatedButton(
                                     onPressed: () {
-                                      Navigator.pushNamed(context, '/');
+                                      Navigator.of(context).pop();
                                     },
                                     child: const Text("OK"),
                                   ),

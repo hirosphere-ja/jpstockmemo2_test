@@ -19,6 +19,12 @@ class _ListPageState extends State<ListPage> {
   }
 
   @override
+  void dispose() {
+    _db.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // const bool isButtonMode = true;
     return Scaffold(
@@ -47,11 +53,16 @@ class _ListPageState extends State<ListPage> {
             // return ListView.builder(
             //   // itemCount: memos.length,
             //   itemBuilder: (context, index) {
-            final listTiles = memos.map(
-              (memo) => StockCard(
-                stockname: memo.stockname.toString(),
-                code: memo.code,
-              ),
+            final listTiles = memos
+                .map(
+                  (memo) => StockCard(
+                    stockname: memo.stockname.toString(),
+                    code: memo.code,
+                  ),
+                )
+                .toList();
+            return ListView(
+              children: listTiles,
             );
           }
           // );

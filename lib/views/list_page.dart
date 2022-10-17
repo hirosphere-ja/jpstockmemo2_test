@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jpstockmemo2/components/custom_alert_dialog.dart';
 import 'package:jpstockmemo2/components/stock_card.dart';
 import 'package:jpstockmemo2/databases/tables.dart';
 
@@ -14,7 +15,6 @@ class _ListPageState extends State<ListPage> {
   @override
   void initState() {
     super.initState();
-
     _db = MemoDatabase();
   }
 
@@ -62,21 +62,18 @@ class _ListPageState extends State<ListPage> {
                       await showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text("${memo.stockname}を削除しますか？"),
-                            actions: <Widget>[
-                              ElevatedButton(
-                                onPressed: () async {
-                                  Navigator.of(context).pop();
-                                  await _db.deleteMemo(memo.code);
-                                },
-                                child: const Text("OK"),
-                              ),
-                            ],
+                          return CustomAlertDialog(
+                            title: "${memo.stockname}を削除しますか？",
+                            buttonText: "OK",
+                            onPressed: () async {
+                              Navigator.of(context).pop();
+                              await _db.deleteMemo(memo.code);
+                            },
                           );
                         },
                       );
                     },
+                    onEditChanged: () async {},
                     createdAt: null,
                     updatedAt: null,
                   ),

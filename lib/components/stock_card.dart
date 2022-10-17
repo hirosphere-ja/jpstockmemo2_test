@@ -18,6 +18,7 @@ updatedAt   ：更新日時
   final String? market;
   final String? memo;
   final dynamic onDeleteChanged;
+  final dynamic onEditChanged;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -29,6 +30,7 @@ updatedAt   ：更新日時
     required this.market,
     required this.memo,
     required this.onDeleteChanged,
+    required this.onEditChanged,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -37,12 +39,7 @@ updatedAt   ：更新日時
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: !isButtonMode ? onDeleteChanged : null,
-      onDoubleTap: !isButtonMode
-          ? () async {
-              debugPrint('ダブルタップされました');
-              // todo 編集画面に遷移させる
-            }
-          : null,
+      onDoubleTap: !isButtonMode ? onEditChanged : null,
       child: Card(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -94,10 +91,7 @@ updatedAt   ：更新日時
                         ),
                         icon: const Icon(Icons.edit),
                         label: const Text('編集'),
-                        onPressed: () async {
-                          debugPrint('編集ボタンが押されました');
-                          // todo 編集画面に遷移させる
-                        },
+                        onPressed: onEditChanged,
                       ),
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(

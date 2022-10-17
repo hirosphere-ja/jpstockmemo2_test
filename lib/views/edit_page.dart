@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jpstockmemo2/components/custom_alert_dialog.dart';
 import 'package:jpstockmemo2/components/custom_text_form_field.dart';
 import 'package:jpstockmemo2/databases/tables.dart';
 import 'package:drift/drift.dart' as drift;
@@ -88,16 +89,12 @@ class _EditPageState extends State<EditPage> {
                           (value) => showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text("保存しました"),
-                                actions: <Widget>[
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text("OK"),
-                                  ),
-                                ],
+                              return CustomAlertDialog(
+                                title: "保存しました",
+                                buttonText: "OK",
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
                               );
                             },
                           ),

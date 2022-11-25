@@ -13,14 +13,23 @@ class EditPage extends StatefulWidget {
 
 class _EditPageState extends State<EditPage> {
   late MemoDatabase _db;
+  late List<Memo> memos = [];
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _codeController = TextEditingController();
 
+  void _refreshMemos() async {
+    _db = MemoDatabase();
+    final data = await _db.getMemos();
+    setState(() {
+      memos = data;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    _db = MemoDatabase();
+    _refreshMemos();
   }
 
   @override
@@ -93,7 +102,8 @@ class _EditPageState extends State<EditPage> {
                                 title: "保存しました",
                                 buttonText: "OK",
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                  Navigator.pushNamed(context, '/');
+                                  _refreshMemos();
                                 },
                               );
                             },

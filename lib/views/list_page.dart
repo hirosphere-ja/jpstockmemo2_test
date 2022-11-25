@@ -12,10 +12,21 @@ class ListPage extends StatefulWidget {
 
 class _ListPageState extends State<ListPage> {
   late MemoDatabase _db;
+
+  late List<Memo> memos = [];
+
+  void _refreshMemos() async {
+    _db = MemoDatabase();
+    final data = await _db.getMemos();
+    setState(() {
+      memos = data;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    _db = MemoDatabase();
+    _refreshMemos();
   }
 
   @override
@@ -31,61 +42,34 @@ class _ListPageState extends State<ListPage> {
       appBar: AppBar(
         title: const Text('ListPage'),
       ),
-      body: FutureBuilder<List<Memo>>(
-        future: _db.getMemos(),
-        builder: (context, snapshot) {
-          final List<Memo>? memos = snapshot.data;
-          if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(
-              child: CircularProgressIndicator(),
+      body: ListView.builder(
+        itemCount: memos.length,
+        itemBuilder: (context, index) => StockCard(
+          isButtonMode: isButtonMode,
+          stockname: memos[index].stockname.toString(),
+          code: memos[index].code,
+          market: "市場",
+          memo: "メモ",
+          onDeleteChanged: () async {
+            await showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return CustomAlertDialog(
+                  title: "${memos[index].stockname}を削除しますか？",
+                  buttonText: "OK",
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                    await _db.deleteMemo(memos[index].code);
+                    _refreshMemos();
+                  },
+                );
+              },
             );
-          }
-
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                snapshot.error.toString(),
-              ),
-            );
-          }
-
-          if (memos != null) {
-            final listTiles = memos
-                .map(
-                  (memo) => StockCard(
-                    isButtonMode: isButtonMode,
-                    stockname: memo.stockname.toString(),
-                    code: memo.code,
-                    market: "市場",
-                    memo: "メモ",
-                    onDeleteChanged: () async {
-                      await showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return CustomAlertDialog(
-                            title: "${memo.stockname}を削除しますか？",
-                            buttonText: "OK",
-                            onPressed: () async {
-                              Navigator.of(context).pop();
-                              await _db.deleteMemo(memo.code);
-                            },
-                          );
-                        },
-                      );
-                    },
-                    onEditChanged: () async {},
-                    createdAt: null,
-                    updatedAt: null,
-                  ),
-                )
-                .toList();
-            return ListView(
-              children: listTiles,
-            );
-          }
-          // );
-          return const Text('No Data');
-        },
+          },
+          onEditChanged: () async {},
+          createdAt: null,
+          updatedAt: null,
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

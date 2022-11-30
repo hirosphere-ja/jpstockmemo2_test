@@ -17,6 +17,7 @@ class _EditPageState extends State<EditPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _codeController = TextEditingController();
+  final TextEditingController _memoController = TextEditingController();
 
   void _refreshMemos() async {
     _db = MemoDatabase();
@@ -37,6 +38,7 @@ class _EditPageState extends State<EditPage> {
     _db.close();
     _nameController.dispose();
     _codeController.dispose();
+    _memoController.dispose();
     super.dispose();
   }
 
@@ -85,6 +87,21 @@ class _EditPageState extends State<EditPage> {
               },
               keyboardType: TextInputType.text,
             ),
+            CustomTextFormField(
+              controller: _memoController,
+              labelText: 'メモ',
+              maxLines: 10,
+              maxLength: null,
+              onChanged: (text) {
+                _memoController.text = text;
+              },
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'メモを入力してください';
+                }
+              },
+              keyboardType: TextInputType.text,
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
@@ -93,6 +110,7 @@ class _EditPageState extends State<EditPage> {
                     final entity = MemosCompanion(
                       code: drift.Value(_codeController.text),
                       stockname: drift.Value(_nameController.text),
+                      memo: drift.Value(_memoController.text),
                     );
                     _db.insertMemo(entity).then(
                           (value) => showDialog(

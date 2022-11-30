@@ -46,10 +46,10 @@ class _ListPageState extends State<ListPage> {
         itemCount: memos.length,
         itemBuilder: (context, index) => StockCard(
           isButtonMode: isButtonMode,
-          stockname: memos[index].stockname.toString(),
+          stockname: memos[index].stockname,
           code: memos[index].code,
           market: "市場",
-          memo: "メモ",
+          memo: memos[index].memo,
           onDeleteChanged: () async {
             await showDialog(
               context: context,
@@ -59,7 +59,7 @@ class _ListPageState extends State<ListPage> {
                   buttonText: "OK",
                   onPressed: () async {
                     Navigator.of(context).pop();
-                    await _db.deleteMemo(memos[index].code);
+                    await _db.deleteMemo(memos[index].id);
                     _refreshMemos();
                   },
                 );

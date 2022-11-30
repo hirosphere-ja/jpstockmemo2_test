@@ -24,10 +24,10 @@ class MemoDatabase extends _$MemoDatabase {
     return await select(memos).get();
   }
 
-  Future<Memo> getMemo(String code) async {
+  Future<Memo> getMemo(int id) async {
     return await (select(memos)
           ..where(
-            (tbl) => tbl.code.equals(code),
+            (tbl) => tbl.code.equals(id.toString()),
           ))
         .getSingle();
   }
@@ -40,10 +40,10 @@ class MemoDatabase extends _$MemoDatabase {
     return await into(memos).insert(entity);
   }
 
-  Future<int> deleteMemo(String code) async {
+  Future<int> deleteMemo(int id) async {
     return await (delete(memos)
           ..where(
-            (tbl) => tbl.code.equals(code),
+            (tbl) => tbl.id.equals(id),
           ))
         .go();
   }

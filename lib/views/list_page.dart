@@ -41,6 +41,7 @@ class _ListPageState extends State<ListPage> {
     const bool isButtonMode = true;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false, // 戻るボタンを表示しない
         title: const Text('ListPage'),
       ),
       body: ListView.builder(

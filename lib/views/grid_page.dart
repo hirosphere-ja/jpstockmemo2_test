@@ -42,6 +42,7 @@ class _GridPageState extends State<GridPage> {
     const bool isButtonMode = false;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false, // 戻るボタンを表示しない
         title: const Text('GridPage'),
       ),
       body: MasonryGridView.count(

@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
-import 'package:jpstockmemo2/route/route_generator.dart';
+import 'package:jpstockmemo2/views/list_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,8 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
-      onGenerateRoute: RouteGenerator.generateRoute,
+      home: const ListPage(),
     );
   }
 }

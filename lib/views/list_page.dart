@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jpstockmemo2/components/custom_alert_dialog.dart';
 import 'package:jpstockmemo2/components/stock_card.dart';
 import 'package:jpstockmemo2/databases/tables.dart';
+import 'package:jpstockmemo2/views/edit_page.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({super.key});
@@ -73,7 +74,12 @@ class _ListPageState extends State<ListPage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.pushNamed(context, '/editpage');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const EditPage(),
+            ),
+          );
         },
         label: const Text('EditPage'),
         icon: const Icon(Icons.add),

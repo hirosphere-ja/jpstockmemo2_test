@@ -1,5 +1,7 @@
-name: jpstockmemo2
-description: A new Flutter project.
+name: jpstockmemo2_test
+description: |
+  日本株投資メモ
+  テストバージョン
 
 publish_to: 'none'
 

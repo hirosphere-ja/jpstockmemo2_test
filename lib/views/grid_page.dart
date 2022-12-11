@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:jpstockmemo2/components/custom_alert_dialog.dart';
-import 'package:jpstockmemo2/components/stock_card.dart';
-import 'package:jpstockmemo2/databases/tables.dart';
-import 'package:jpstockmemo2/views/edit_page.dart';
+import 'package:jpstockmemo2_test/components/custom_alert_dialog.dart';
+import 'package:jpstockmemo2_test/components/stock_card.dart';
+import 'package:jpstockmemo2_test/databases/tables.dart';
+import 'package:jpstockmemo2_test/views/edit_page.dart';
 
 class GridPage extends StatefulWidget {
   const GridPage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jpstockmemo2/components/custom_alert_dialog.dart';
-import 'package:jpstockmemo2/components/custom_text_form_field.dart';
-import 'package:jpstockmemo2/databases/tables.dart';
+import 'package:jpstockmemo2_test/components/custom_alert_dialog.dart';
+import 'package:jpstockmemo2_test/components/custom_text_form_field.dart';
+import 'package:jpstockmemo2_test/databases/tables.dart';
 import 'package:drift/drift.dart' as drift;
 
 class EditPage extends StatefulWidget {

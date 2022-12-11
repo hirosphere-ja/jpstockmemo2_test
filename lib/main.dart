@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
-import 'package:jpstockmemo2/views/list_page.dart';
+import 'package:jpstockmemo2_test/views/list_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
